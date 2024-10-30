@@ -8,6 +8,8 @@ Shader "Custom/ColourGrading"
         _LUT("LUT", 2D) = "white" {}
         // The contribution factor for blending between the original color and the graded color.
         _Contribution("Contribution", Range(0, 1)) = 1
+        // Toggle for using color grading
+        _UseColorGrading ("Use Color Grading", Float) = 1 // New property
     }
 
     SubShader
@@ -52,6 +54,7 @@ Shader "Custom/ColourGrading"
             sampler2D _MainTex; // Sampler for the main texture.
             sampler2D _LUT; // Sampler for the LUT texture.
             float _Contribution; // Blend factor for original vs. graded color.
+            float _UseColorGrading; // Control whether to apply color grading.
 
             // Fragment shader function
             fixed4 frag (v2f i) : SV_Target
@@ -60,6 +63,12 @@ Shader "Custom/ColourGrading"
 
                 // Sample the main texture color and ensure it's in the [0, 1] range.
                 fixed4 col = saturate(tex2D(_MainTex, i.uv));
+
+                // If color grading is disabled, return the original color.
+                if (_UseColorGrading < 0.5)
+                {
+                    return col;
+                }
 
                 // Calculate texel size for the LUT based on the number of colors.
                 float2 lutTexelSize = 1.0 / float2(COLORS, COLORS);
