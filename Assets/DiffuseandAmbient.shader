@@ -1,4 +1,4 @@
-Shader "Custom/SimpleLightingShaderWithTexture"
+Shader "Custom/SimpleLightingShaderWithTextureAndFog"
 {
     Properties
     {
@@ -14,23 +14,35 @@ Shader "Custom/SimpleLightingShaderWithTexture"
         _LightColor ("Light Color", Color) = (1,1,1,1)
         // Position of the light in world space.
         _LightPosition ("Light Position", Vector) = (0, 10, 0, 1)
+        // Fog density (adjust for stronger/weaker fog effect).
+        _FogDensity ("Fog Density", Range(0, 1)) = 0.8
+        // Fog color.
+        _FogColor ("Fog Color", Color) = (0.5, 0.5, 0.5, 1)
     }
 
     SubShader
     {
-        // Tag to specify the render type as opaque.
         Tags { "RenderType"="Opaque" }
-        // Level of detail for the shader.
         LOD 200
 
         Pass
         {
             CGPROGRAM
-            // Specify the vertex and fragment shaders.
             #pragma vertex vert
             #pragma fragment frag
+            #include "UnityCG.cginc"
 
-            // Input structure for vertex data.
+            // Custom properties
+            sampler2D _MainTex;            // Sampler for the main texture.
+            float4 _Color;                 // Object color.
+            float _AmbientIntensity;       // Ambient light intensity.
+            float _DiffuseIntensity;       // Diffuse light intensity.
+            float4 _LightColor;            // Color of the light source.
+            float4 _LightPosition;         // Position of the light source.
+            float _FogDensity;             // Fog density.
+            float4 _FogColor;              // Fog color.
+
+            // Input structure for the vertex shader
             struct appdata
             {
                 float4 vertex : POSITION;  // Vertex position in object space.
@@ -38,7 +50,7 @@ Shader "Custom/SimpleLightingShaderWithTexture"
                 float2 uv : TEXCOORD0;     // UV coordinates for texture mapping.
             };
 
-            // Output structure for vertex data after processing.
+            // Output structure for the vertex shader
             struct v2f
             {
                 float4 pos : SV_POSITION;    // Position in clip space.
@@ -47,51 +59,49 @@ Shader "Custom/SimpleLightingShaderWithTexture"
                 float2 uv : TEXCOORD2;       // UV coordinates.
             };
 
-            // Shader properties
-            sampler2D _MainTex;            // Sampler for the main texture.
-            float4 _Color;                 // Object color.
-            float _AmbientIntensity;       // Ambient light intensity.
-            float _DiffuseIntensity;       // Diffuse light intensity.
-            float4 _LightColor;            // Color of the light source.
-            float4 _LightPosition;         // Position of the light source.
-
             // Vertex shader
-            v2f vert (appdata v)
+            v2f vert(appdata v)
             {
                 v2f o;
-                // Transform vertex position to clip space.
                 o.pos = UnityObjectToClipPos(v.vertex);
-                // Transform normal to world space.
                 o.normal = normalize(mul(v.normal, (float3x3)unity_WorldToObject));
-                // Calculate world position of the vertex.
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                // Pass UV coordinates to fragment shader.
                 o.uv = v.uv;
-                return o; // Return processed vertex data.
+                return o;
             }
 
             // Fragment shader
-            float4 frag (v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                // Sample the texture color at the UV coordinates and multiply by the object color.
-                float4 texColor = tex2D(_MainTex, i.uv) * _Color;
+                // Sample the base texture color
+                half4 texColor = tex2D(_MainTex, i.uv) * _Color;
 
-                // Calculate ambient lighting.
+                // Calculate ambient lighting
                 float3 ambient = _LightColor.rgb * _AmbientIntensity;
 
-                // Calculate diffuse lighting.
+                // Calculate diffuse lighting
                 float3 lightDir = normalize(_LightPosition.xyz - i.worldPos); // Direction from fragment to light.
-                float diffuseFactor = max(dot(i.normal, lightDir), 0.0); // Compute diffuse factor using dot product.
-                float3 diffuse = _LightColor.rgb * _DiffuseIntensity * diffuseFactor; // Scale by light color and intensity.
+                float diffuseFactor = max(dot(i.normal, lightDir), 0.0); // Compute diffuse factor.
+                float3 diffuse = _LightColor.rgb * _DiffuseIntensity * diffuseFactor;
 
-                // Combine texture color with ambient and diffuse lighting.
+                // Combine the base texture with ambient and diffuse lighting
                 float3 finalColor = texColor.rgb * (ambient + diffuse);
-                return float4(finalColor, texColor.a); // Return final color with texture alpha.
+
+                // Compute fog factor based on distance from the camera
+                float dist = length(i.worldPos - _WorldSpaceCameraPos.xyz); // Distance from camera
+                float fogFactor = exp(-_FogDensity * dist); // Exponential fog effect
+                fogFactor = clamp(fogFactor, 0.0, 1.0); // Clamp the fog factor to [0, 1]
+
+                // Lerp between the final color and the fog color
+                finalColor = lerp(finalColor, _FogColor.rgb, 1.0 - fogFactor);
+
+                // Return final color with texture alpha
+                return float4(finalColor, texColor.a);
             }
+
             ENDCG
         }
     }
 
-    // Fallback shader if this shader fails to compile.
-    FallBack "Diffuse"
+    Fallback "Diffuse"
 }
