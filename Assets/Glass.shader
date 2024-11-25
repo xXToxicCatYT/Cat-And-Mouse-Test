@@ -69,7 +69,7 @@ Shader "Custom/GlassWithFog"
                 half4 texColor = tex2D(_MainTex, i.uv);
 
                 // Compute fog factor based on distance from the camera
-                float fogDensity = 0.8; // Fog density, adjust as needed
+                float fogDensity = 1; // Fog density, adjust as needed
                 float3 fogColor = float3(0.5, 0.5, 0.5); // Darker fog color (dark gray)
                 float dist = length(i.worldPos - _WorldSpaceCameraPos.xyz); // Distance from camera
                 float fogFactor = exp(-fogDensity * dist); // Exponential fog effect

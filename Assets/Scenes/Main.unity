@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_FogDensity: 1
+  m_LinearFogStart: 0.1
+  m_LinearFogEnd: 2
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: c4d847de61e9793458b01daa6c44beec, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 57343602}
   - component: {fileID: 57343603}
   m_Layer: 0
-  m_Name: Left Ear
+  m_Name: Left Ear Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,8 +356,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.098039225, g: 0.43921572, b: 0.43921572, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.7294118, g: 0, b: 0, a: 1}
+      key1: {r: 0.7294118, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -737,7 +737,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266060061}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3059022, y: -0.0000000325744, z: 0.000000011097131, w: 0.95206296}
+  m_LocalRotation: {x: 0.3059022, y: 0.00000003257441, z: -0.000000011097134, w: 0.95206296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 319112089}
   - component: {fileID: 319112090}
   m_Layer: 0
-  m_Name: Right Ear
+  m_Name: Right Ear Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,8 +944,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.13333334, g: 0.4901961, b: 0.4901961, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.7294118, g: 0, b: 0, a: 1}
+      key1: {r: 0.7294118, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2440,7 +2440,7 @@ GameObject:
   - component: {fileID: 900602968}
   - component: {fileID: 900602971}
   m_Layer: 0
-  m_Name: WashingMachineRIm
+  m_Name: WashingMachineRim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2921,7 +2921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16647552, y: 0.000000008483139, z: -0.0000000014322206, w: 0.9860456}
+  m_LocalRotation: {x: 0.16647552, y: -0.000000008483137, z: 0.0000000014322203, w: 0.9860456}
   m_LocalPosition: {x: -1.241, y: 3.58, z: 43.8904}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3230,7 +3230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028342765}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15786438, y: 0.000000008470318, z: -0.0000000015061947, w: 0.98746085}
+  m_LocalRotation: {x: 0.15786438, y: -0.000000008470315, z: 0.0000000015061941, w: 0.98746085}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
