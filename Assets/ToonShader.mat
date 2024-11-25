@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lambert
-  m_Shader: {fileID: 4800000, guid: 1d5173382f66e494caa888ded5751712, type: 3}
+  m_Name: ToonShader
+  m_Shader: {fileID: 4800000, guid: 2cb2462e3b2c2d94dbf9cb95c0ff09fd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -72,12 +72,20 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RimPower: 2
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Threshold: 0.5
+    - _Threshold1: 0.3
+    - _Threshold2: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 0.35220122, g: 0.35220122, b: 0.35220122, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MiddleColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 0, a: 1}
+    - _ShadowColor: {r: 0.12578613, g: 0.12578613, b: 0.12578613, a: 1}
   m_BuildTextureStacks: []
