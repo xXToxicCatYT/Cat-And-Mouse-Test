@@ -7,7 +7,7 @@ public class ColorGradingToggle : MonoBehaviour
     [SerializeField] private Material colorGradingMaterial;
 
     // Toggles the color grading effect
-    private bool isColorGradingEnabled = true; // Initial state for color grading
+    private bool isColorGradingEnabled = false; // Initial state for color grading
 
     private void Update()
     {
