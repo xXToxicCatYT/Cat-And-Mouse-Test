@@ -133,6 +133,90 @@ Samples the diffuse texture and applies it as the base color.
 Unpacks the normal from the bump texture (_myBump) using UnpackNormal, then scales it by _mySlider to adjust the bump intensity.
 Modifies Normal to include the bump effect, giving the surface a more textured, 3D look.
 
+------------------------------------- UPDATE 1 -------------------------------------
+
+IMPROVEMENTS:
+
+Lighting Model Change (Toon Ramp):
+
+Previous: Lambert Shading
+
+![image](https://github.com/user-attachments/assets/89c2ba28-ff71-4b0a-bab9-b62120cf8bbd)
+
+Present: Toon Ramp
+
+![image](https://github.com/user-attachments/assets/46fa3250-9b2d-4d03-b9e3-817b915e92c7)
+
+Toon Ramp Implementation
+
+![image](https://github.com/user-attachments/assets/19cfbf94-ec38-4a41-9209-1e1d0a0963ae)
+
+This toon ramp shader calculates lighting intensity using the dot product between the surface normal and a fixed light direction. Based on this intensity, the shader compares the value against two thresholds (_Threshold1 and _Threshold2) to assign one of three colors (_BaseColor, _MiddleColor, or _ShadowColor). The key functionality lies in the if statements in the fragment shader, which segment the light intensity into discrete bands, creating the toon shading effect.
+
+Texture Fixes:
+
+Old Shelf
+
+![image](https://github.com/user-attachments/assets/3aceda14-9aee-4442-82aa-74427a8d5284)
+
+New Shelf
+
+![image](https://github.com/user-attachments/assets/79bfb4fc-f93e-4e1e-a161-0e9dfd289276)
+
+Old Safe
+
+![image](https://github.com/user-attachments/assets/673bb5eb-357f-46e4-99d3-335bf5322b97)
+
+New Safe
+
+![image](https://github.com/user-attachments/assets/646e03a6-8334-4268-a736-a3a60577643c)
+
+Old Wall
+
+![image](https://github.com/user-attachments/assets/c30f6482-f4bf-4e37-9708-1012598ace05)
+
+New Wall
+
+![image](https://github.com/user-attachments/assets/2babc127-a714-4f6c-9ef7-d25a7bb73640)
+
+UV Maps For Textures
+
+![image](https://github.com/user-attachments/assets/6eb2485a-1255-465c-8ac8-9cbd89469976)
+
+![image](https://github.com/user-attachments/assets/7a720970-cd97-4eb1-a125-271219d9c2c9)
+
+![image](https://github.com/user-attachments/assets/15ba4d49-308e-43db-bc62-db85837981f7)
+
+![image](https://github.com/user-attachments/assets/0dbce042-68fd-489f-bba3-46f10a61d99f)
+
+Visual Effects:
+
+Glass
+
+![image](https://github.com/user-attachments/assets/38189745-6d57-487a-a2ac-5fc1207f7fa9)
+
+![image](https://github.com/user-attachments/assets/e068c9b4-68df-4278-9b33-90e8c2d49634)
+
+This glass shader creates a refractive effect by using the GrabPass to capture the screen behind the object. The fragment shader offsets the UV coordinates of the grabbed texture based on the normal map (_BumpMap) and a scaling factor (_ScaleUV). The critical effect comes from the bump offset applied to UV grab in the fragment shader, which creates the illusion of a warped, glass-like surface.
+
+Particles
+
+![image](https://github.com/user-attachments/assets/d33d1495-1ad9-4882-8d37-d3bc90d430ba)
+
+To enhance the visual appeal and make the power-up more noticeable, we added particle effects to it. These effects also help make the power-up stand out in the environment. The particles radiate vibrant colors and subtle motion, creating a sense of energy and allure that draws the player’s attention. This not only improves the aesthetics but also makes the power-up’s presence more engaging and rewarding to interact with.
+
+Eye Trail VFX
+
+![image](https://github.com/user-attachments/assets/747e7311-27c9-490a-8787-874261b0bd13)
+
+To emphasize the predatory nature of the cat in the game, we added an eye trail effect. This subtle yet striking visual creates the impression of focused intensity, mimicking the sharp gaze of a predator locked onto its prey. The trail adds an air of stealth and danger, enhancing the cat’s characterization and making its movements feel deliberate and menacing. Also, we chose to make it red as a symbol of a predator needing to sate its blood lust.
+
+Dusty Environmental Visual Effect
+
+![image](https://github.com/user-attachments/assets/876ec012-84c9-41d8-a921-1e189b0239c7)
+
+We added a dust effect in our game to enhance the immersive atmosphere of the abandoned basement setting. As the player controls the cat, the subtle clouds of dust stirred up by movement create a sense of realism, emphasizing the neglected and eerie environment. The dust also serves a gameplay purpose, as it makes it harder to spot the mouse increasing the game's difficulty. This effect helps players feel more connected to the cat's perspective, as they navigate through the cluttered space in search of the mouse.
+
 References:
 
 The floor texture used for bump mapping: https://everytexture.com/everytexture-com-stock-pavement-concrete-texture-00010/
