@@ -199,7 +199,7 @@ Glass
 
 This glass shader creates a refractive effect by using the GrabPass to capture the screen behind the object. The fragment shader offsets the UV coordinates of the grabbed texture based on the normal map (_BumpMap) and a scaling factor (_ScaleUV). The critical effect comes from the bump offset applied to UV grab in the fragment shader, which creates the illusion of a warped, glass-like surface.
 
-Code
+Glass Code
 
 ![image](https://github.com/user-attachments/assets/266c1c5d-9ff5-406b-a6ea-019c5fb6ba16)
 
