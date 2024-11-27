@@ -226,6 +226,8 @@ Dusty Environmental Visual Effect
 
 We added a dust effect in our game to enhance the immersive atmosphere of the abandoned basement setting. As the player controls the cat, the subtle clouds of dust stirred up by movement create a sense of realism, emphasizing the neglected and eerie environment. The dust also serves a gameplay purpose, as it makes it harder to spot the mouse increasing the game's difficulty. This effect helps players feel more connected to the cat's perspective, as they navigate through the cluttered space in search of the mouse.
 
+Video Demo: https://youtu.be/6qpGHknSRMQ
+
 References:
 
 The floor texture used for bump mapping: https://everytexture.com/everytexture-com-stock-pavement-concrete-texture-00010/
